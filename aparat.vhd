@@ -161,7 +161,6 @@ begin
     
     --aici trebuie facut un baleaj foarte rapid intre drinkCounter si wallet
     --incat sa para ca anodes de 0 si anodes de 1 apar in acelasi timp
-    --nu stiu cum
     
     BCD_screen: process(drinkCounter)
     begin
