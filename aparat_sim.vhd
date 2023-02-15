@@ -1,0 +1,131 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 12/30/2022 10:04:49 PM
+-- Design Name: 
+-- Module Name: aparat_sim - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity aparat_sim is
+--  Port ( );
+end aparat_sim;
+
+architecture Behavioral of aparat_sim is
+    component aparat is
+        Port(
+        Cappucino: in std_logic := '0';
+        Americano: in std_logic := '0';
+        Ceai: in std_logic := '0';
+        
+        Reset: in std_logic := '0';
+        Clock: in std_logic;
+        Coins: in std_logic := '0';
+        
+        Idle: out std_logic;
+        Preparing: out std_logic;
+        Not_Enough_Money: out std_logic
+        
+        
+        );
+       end component;
+       
+    signal Clock: std_logic:= '0';
+    signal Coins: std_logic:= '0';
+    signal Reset: std_logic:= '0';
+    signal Cappucino: std_logic:= '0';
+    signal Americano: std_logic:= '0';
+    signal Ceai: std_logic:= '0';
+    signal Idle: std_logic := '1';
+    signal Preparing: std_logic := '0';
+    signal Not_Enough_Money: std_logic := '0';
+    
+    --signal temp_status: std_logic_vector (1 downto 0) := "00";
+    --signal temp_drink_type: std_logic_vector (1 downto 0) := "00";
+
+
+begin
+
+uut: aparat port map( --Anodes => Anodes,
+                       --Segments => Segments,
+                       Americano => Americano,
+                       Cappucino => Cappucino,
+                       Ceai => Ceai,
+                       Reset => Reset,
+                       --Machine_On => Machine_On,
+                       --Enable => Enable,
+                       Clock => Clock,
+                       Coins => Coins,
+                       --Drink_Type => Drink_Type,
+                       --Balancee => Balancee,
+                       Idle => Idle,
+                       Preparing => Preparing,
+                       Not_Enough_Money => Not_Enough_Money
+                       );
+clock_process: process
+begin
+    Clock <= not Clock;
+    wait for 10ns;
+end process;
+
+stimulus: process
+begin
+
+
+Coins <= not Coins;
+wait for 2ms;
+
+Coins <= not Coins;
+wait for 2ms;
+
+wait for 10ms;
+
+Reset <= not Reset;
+wait for 2ms;
+
+Reset <= not Reset;
+wait for 2ms;
+
+--status <= "00";
+--wait for 50ns;
+
+--temp_drink_type <= "01";
+
+--wait for 100ns;
+
+--Coins <= '1';
+--Coins <= '1';
+
+--wait for 200ns;
+
+--temp_drink_type <= "10";
+--wait for 100s;
+
+wait;
+end process;
+
+end Behavioral;
